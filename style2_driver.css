@@ -1,0 +1,485 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: #020410;
+    color: #e4e4e4;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 12.5%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.navbar a{
+    position: relative;
+    font-family: lobster;
+    font-size: 17px;
+    color: #67069b;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.navbar a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: #67069b;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.7s;
+}
+
+.navbar a:hover::after{
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.search-bar{
+    width: 250px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #67069b;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #67069b;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.search-bar input::placeholder{
+    color: #67069b;
+}
+
+.search-bar button{
+    width: 40px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar button i{
+    font-size: 22px;
+    color: #67069b;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 550px;
+    background: url('login_driver.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.container .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58%;
+    height: 100%;
+    padding: 80px;
+    color: #67069b;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.content .logo{
+    font-size: 30px;
+}
+
+.text-sci h2{
+    font-family: lobster;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.text-sci h2 span{
+    font-family: lobster;
+    font-size: 25px;
+}
+
+.text-sci p{
+    font-family: 'PT Serif Caption', serif;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+.text-sci .social-icons a i{
+    font-size: 22px;
+    color: #67069b;
+    margin-right: 20px;
+    transition: 0.5s;
+}
+
+.text-sci .social-icons a i:hover{
+    transform: scale(1.2);
+}
+
+.container .logren-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #67069b #020410;
+}
+
+.logren-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.logren-box::-webkit-scrollbar-track {
+    background: #020410;
+}
+
+.logren-box::-webkit-scrollbar-thumb {
+    background-color: #67069b;
+    border-radius: 10px;
+    border: 2px solid #020410;
+}
+
+.logren-box .form-box {
+    position: absolute;
+    font-family: 'PT Serif Caption', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #67069b;
+    transition: transform 0.6s ease;
+    flex-direction: column;
+    padding: 40px 20px; /* Increased padding for breathing room */
+}
+
+.logren-box .form-box.login {
+    transform: translateX(0);
+    transition-delay: 0.7s;
+}
+
+.logren-box.active .form-box.login {
+    transform: translateX(500px);
+    transition-delay: 0s;
+}
+
+.logren-box .form-box.register {
+    height:100%;
+    transform: translateX(500px);
+    transition-delay: 0s;
+}
+
+.logren-box.active .form-box.register {
+    transform: translateX(0);
+    transition-delay: 0.6s;
+    
+}
+
+.form-box h2{
+    font-family: lobster;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px; /* More space for uniformity */
+}
+
+.form-box .input-box{
+    position: relative;
+    width: 340px;
+    height: 50px;
+    border-bottom: 2px solid #67069b;
+    margin: 25px 0; /* Consistent margin */
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'PT Serif Caption', serif;
+    font-size: 18px;
+    color: #67069b;
+    font-weight: 500;
+    padding-right: 28px;
+    transition: 0.3s; /* Smooth focus effect */
+}
+
+.input-box textarea {
+    resize: vertical;
+    min-height: 100px;
+    height: auto; /* Allow natural height */
+    padding-top: 10px; /* Better text alignment */
+}
+
+.input-box input::placeholder,
+.input-box select::placeholder,
+.input-box textarea::placeholder{
+    color: #a39ec1;
+    opacity: 0.8; /* Subtle visibility */
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    font-family: lobster;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s ease;
+    color: #67069b; /* Uniform color */
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box select:focus ~ label,
+.input-box select:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label{
+    top: -5px;
+    font-size: 14px; /* Smaller on float for elegance */
+    color: #a39ec1; /* Softer color on active */
+}
+
+.input-box .icon{
+    position: absolute;
+    top: 13px;
+    right: 0;
+    font-size: 19px;
+    color: #67069b;
+    cursor: pointer; /* Interactive feel */
+}
+
+.input-box input[type="file"] {
+    opacity: 0; /* Hide default input */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.input-box .file-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #67069b;
+    font-family: 'PT Serif Caption', serif;
+    font-size: 16px;
+    padding: 0 28px 0 0;
+    cursor: pointer;
+}
+
+.input-box .file-label::after {
+    content: 'Choose File';
+    background: #67069b;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-box .file-label:hover::after {
+    background: #55057a;
+}
+
+.input-box .radio-group{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    gap: 20px; /* Better spacing */
+    align-items: center;
+    transition: .5s ease;
+}
+
+.input-box:has(.radio-group) {
+    height: auto; /* Flexible for groups */
+    border-bottom: none; /* No border for radio boxes */
+    margin-bottom: 15px; /* Tighter for uniformity */
+}
+
+.input-box .radio-group input[type="radio"] {
+    accent-color: #67069b;
+    transform: scale(1.2); /* Larger for touch */
+    margin-right: 5px;
+}
+
+.input-box .radio-group label{
+    font-size: 16px; /* Match input size */
+    color: #67069b;
+    font-family: 'PT Serif Caption', serif;
+    font-weight: 500;
+}
+
+.input-box:focus-within .radio-group,
+.input-box:valid .radio-group {
+    top: 25px; /* "Float" the group down on focus */
+}
+
+.form-box .remember-forget{
+    font-family: 'PT Serif Caption', serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    margin: 10px 0 20px; /* Adjusted for flow */
+    display: flex;
+    justify-content: space-between;
+    width: 340px; /* Match input width */
+}
+
+.remember-forget label input{
+    accent-color: #67069b;
+    margin-right: 5px;
+    transform: scale(1.2);
+}
+
+.remember-forget a{
+    color: #67069b;
+    text-decoration: none;
+}
+
+.remember-forget a:hover{
+    text-decoration: underline;
+}
+
+.btn{
+    width: 100%;
+    height: 45px;
+    background: rgb(254, 252, 252);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: lobster;
+    font-size: 16px;
+    color: #67069b;
+    font-weight: 500;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+.btn:hover{
+    background: #f0f0f0;
+}
+
+.form-box .login-register{
+    font-family: lobster;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-register p a{
+    color: #67069b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-register p a:hover{
+    text-decoration: underline;
+}
+
+.background{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: url('login_driver.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px){
+    .header{
+        padding: 15px 5%;
+    }
+
+    .navbar a{
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    .search-bar{
+        width: 150px;
+    }
+
+    .container{
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+
+    .content{
+        padding: 20px;
+    }
+
+    .logren-box{
+        width: 100%;
+    }
+
+    .form-box .input-box{
+        width: 100%;
+    }
+
+    .btn{
+        font-size: 14px;
+    }
+
+    .form-box .remember-forget {
+        width: 100%;
+    }
+}

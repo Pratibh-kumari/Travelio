@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style3.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="aboutus.pptx">About</a>
+            <a href="services.html">Contact</a>
+            <a href="MEDTrust.pptx">Help</a>
+        </nav>
+
+        <form action="#" class="search-bar">
+            <input type="text" placeholder="Search....">
+            <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+    </header>
+
+    <div class="background"></div>
+    <div class="container">
+        <div class="content">
+            <h1 style="color:rgb(48, 1, 77);"class="logo";>ResQTech</h1>
+            <div class="text-sci">
+                <h2 style="color:rgb(48, 1, 77);">Welcome!<br><span>To our login page</span></h2>
+                <p>Enter your login details to access your account OR Open a new account to join ResQTech and take the first step towards green energy</p>
+                <div class="social-icons">
+                    <a href="http://www.linkedin.com/in/kanwal-v"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://www.instagram.com/kanwal.vyas?igsh=Yml1bDZ4Y2JxdHhh"><i class='bx bxl-instagram'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="logren-box">
+            <div class="form-box login">
+                <form id="loginForm">
+                    <h2>Sign In</h2>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxl-gmail'></i></span>
+                        <input type="email" id="loginEmail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" id="loginPassword" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forget">
+                        <label><input type="checkbox"> Remember Me</label>
+                        <a href="#">Forget Password?</a>
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" class="register-link">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box register">
+                <form id="registerForm">
+                    <h2>Sign Up</h2>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-user'></i></span>
+                        <input type="text" id="registerName" required>
+                        <label>Name</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxl-gmail'></i></span>
+                        <input type="email" id="registerEmail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" id="registerPassword" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forget">
+                        <label><input type="checkbox"> I agree to the <a href="privacy_policy.html" class="terms-link">Terms and Conditions</a></label>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                    <div class="login-register">
+                        <p>Already have an account? <a href="#" class="login-link">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script type="module">
+  // Import Firebase modules
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { 
+      getAuth,
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword,
+      sendEmailVerification,
+      onAuthStateChanged,
+      signOut
+  } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+  import { 
+      getFirestore, 
+      collection, 
+      addDoc 
+  } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+  // Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCuntWsD_Dg22pGULwJdsWRKbLp-_6K6Ss",
+  authDomain: "sih-resqtech.firebaseapp.com",
+  projectId: "sih-resqtech",
+  storageBucket: "sih-resqtech.firebasestorage.app",
+  messagingSenderId: "571974603317",
+  appId: "1:571974603317:web:ff740ed932c1743c13177c"
+};
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // DOM Elements
+  const logrenBox = document.querySelector('.logren-box');
+  const loginLink = document.querySelector('.login-link');
+  const registerLink = document.querySelector('.register-link');
+
+  // Form Switching
+  registerLink.addEventListener('click', () => logrenBox.classList.add('active'));
+  loginLink.addEventListener('click', () => logrenBox.classList.remove('active'));
+
+  // Registration
+  document.getElementById('registerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+          .then(async (userCredential) => {
+              const user = userCredential.user;
+
+              // Send verification email
+              await sendEmailVerification(user);
+              alert("Verification email sent! Please check your inbox.");
+
+              // Save user data to Firestore
+              await addDoc(collection(db, "users"), {
+                  uid: user.uid,
+                  name: name,
+                  email: email,
+                  createdAt: new Date()
+              });
+
+              // Optional: sign out until verified
+              await signOut(auth);
+              alert("You must verify your email before logging in.");
+              logrenBox.classList.remove('active'); // Switch to login
+          })
+          .catch((error) => alert(error.message));
+  });
+
+  // Login
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+              const user = userCredential.user;
+
+              if (user.emailVerified) {
+                  alert('Login successful!');
+                  window.location.href = "./home.html"; // Redirect to home page
+              } else {
+                  alert("Email not verified. Please check your inbox.");
+                  signOut(auth); // Prevent access
+              }
+          })
+          .catch((error) => alert(error.message));
+  });
+
+  // Resend Verification Email
+  document.getElementById('resendBtn').addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if (user && !user.emailVerified) {
+          try {
+              await sendEmailVerification(user);
+              alert("Verification email resent! Check your inbox.");
+          } catch (error) {
+              alert(error.message);
+          }
+      } else {
+          alert("No unverified user logged in.");
+      }
+  });
+
+  // Optional: Auth state monitoring
+  onAuthStateChanged(auth, (user) => {
+      if (user && !user.emailVerified) {
+          console.warn("User logged in but email not verified.");
+      }
+  });
+</script>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style2_driver.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="aboutus.pptx">About</a>
+            <a href="services.html">Contact</a>
+            <a href="MEDTrust.pptx">Help</a>
+        </nav>
+        <form action="#" class="search-bar">
+            <input type="text" placeholder="Search....">
+            <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+    </header>
+
+    <div class="background"></div>
+    <div class="container">
+        <div class="content">
+            <h1 style="color:rgb(48, 1, 77);" class="logo">ResQTech</h1>
+            <div class="text-sci">
+                <h2 style="color:rgb(48, 1, 77);">Welcome!<br><span>To our driver login page</span></h2>
+                <p>Enter your login details to access your account OR open a new account to join ResQTech and take the first step towards green energy</p>
+                <div class="social-icons">
+                    <a href="http://www.linkedin.com/in/kanwal-v"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://www.instagram.com/kanwal.vyas?igsh=Yml1bDZ4Y2JxdHhh"><i class='bx bxl-instagram'></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="logren-box">
+            <!-- Login Form -->
+            <div class="form-box login">
+                <form id="loginForm">
+                    <h2>Sign In</h2>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxl-gmail'></i></span>
+                        <input type="email" id="loginEmail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" id="loginPassword" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forget">
+                        <label><input type="checkbox"> Remember Me</label>
+                        <a href="#">Forget Password?</a>
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" class="register-link">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="form-box register">
+                <form id="registerForm">
+                    <h2>Sign Up</h2>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-user'></i></span>
+                        <input type="text" id="registerName" required>
+                        <label>Name:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxl-gmail'></i></span>
+                        <input type="email" id="registerEmail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" id="registerPassword" required>
+                        <label>Password:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-id-card'></i></span>
+                        <input type="text" id="licenseNo" required>
+                        <label>Driving License No:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-phone'></i></span>
+                        <input type="text" id="contactNo" required>
+                        <label>Contact No:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-car'></i></span>
+                        <input type="text" id="carName" required>
+                        <label>Car model and No:</label>
+                    </div>
+
+                    <div class="remember-forget">
+                        <label>
+                            <input type="checkbox" id="terms" required>
+                            I agree to the <a href="privacy_policy.html" class="terms-link">Terms and Conditions</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn">Sign Up</button>
+
+                    <div class="login-register">
+                        <p>Already have an account? <a href="#" class="login-link">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Script -->
+    <script type="module" src="verifyEmail_driver.js"></script>
+</body>
+</html>
