@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Travelio — Route Comparison</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./main.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <header class="border-bottom mb-4" >
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-3"  style="background: linear-gradient(45deg,#ffffff25,#f411cea6);">
+        <div class="container">
+          <a class="navbar-brand text-dark fw-bold" href="#">Travelio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-2">
+                <a class="nav-link active text-dark" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a href="./main.html" class="nav-link text-dark" href="./main.html">Ride</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link text-dark" href="./drive.html">Drive</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link text-dark" href="./review.html">Review</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link text-dark" href="./help.html">Help</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+                <div class="dropdown d-flex align-items-center" style="margin-left:20px;">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="./images/istockphoto-1495088043-612x612.jpg"  alt="GSRTC" class="img-fluid mb-2" style="height:48px; width:auto; background:#f0f0f0; border-radius:8px;margin-left: 20px;">
+                </a>
+                <ul class="dropdown-menu bg-white">
+                  <li><a class="dropdown-item text-dark" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-dark" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-dark" href="#">Something else here</a></li>
+                </ul>
+              </div>
+                        
+                    </div>
+                  </div>
+        </div>
+      </nav>
+    </header>
+  <div class="app-card">
+   <div class="mb-3">
+          <label for="passengerName" class="form-label">Passenger Name</label>
+          <input type="text" id="passengerName" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+
+    <div class="row g-3 input-grid align-items-end">
+      <div class="col-md-5">
+        <label for="fromInput">From</label>
+        <div class="input-box position-relative">
+          <input id="fromInput" class="form-control" placeholder="Enter pickup location..." autocomplete="off">
+          <div id="fromDropdown" class="list-group position-absolute w-100" style="top:62px; z-index:1000; display:none;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-1 text-center">
+        <button id="swapBtn" class="btn btn-light swap-btn" title="Swap">↔</button>
+      </div>
+
+      <div class="col-md-5">
+        <label for="toInput">To</label>
+        <div class="input-box position-relative">
+          <input id="toInput" class="form-control" placeholder="Enter destination..." autocomplete="off">
+          <div id="toDropdown" class="list-group position-absolute w-100" style="top:62px; z-index:1000; display:none;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+          <div class="modes d-flex align-items-center mt-2">
+            <label class="me-3"><input type="checkbox" id="modeCar" checked> 🚗 Car</label>
+            <label class="me-3"><input type="checkbox" id="modeBus" checked> 🚌 Bus</label>
+            <label class="me-3"><input type="checkbox" id="modeAuto" checked> 🛺 Auto</label>
+          </div>
+          <div class="text-muted small">Leave unchecked to include/exclude modes</div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <button id="compareBtn" class="compare-btn w-100">Compare Options →</button>
+      </div>
+    </div>
+    <div id="resultsArea" class="mt-4">
+      <h3 class="section-title">Route Comparison</h3>
+      <div id="resultsContainer" class="row g-4 mt-2"></div>
+    </div>
+  </div>
+  <script>
+  const stops = [
+    {stop_id:1, stop_name:'Old Campus'},
+    {stop_id:2, stop_name:'Dafnala'},
+    {stop_id:3, stop_name:'R.T.O. circle'},
+    {stop_id:4, stop_name:'Sabarmati'},
+    {stop_id:5, stop_name:'Visat Junction'},
+    {stop_id:6, stop_name:'Tapovan Circle'},
+    {stop_id:7, stop_name:'Koba Circle'},
+    {stop_id:8, stop_name:'Bhaijipura Cross Road'},
+    {stop_id:9, stop_name:'Raksha Shakti Circle'},
+    {stop_id:10, stop_name:'Reliance Chokdi'},
+    {stop_id:11, stop_name:'GH 0'},
+    {stop_id:12, stop_name:'GH-3'},
+    {stop_id:13, stop_name:'GH-7'},
+    {stop_id:14, stop_name:'Sector 30 Circle'},
+    {stop_id:15, stop_name:'Chiloda'},
+    {stop_id:16, stop_name:'Dahegam Bus station'},
+    {stop_id:17, stop_name:'RRU Campus'},
+    {stop_id:18, stop_name:'Airport circle'},
+    {stop_id:19, stop_name:'Hansol'},
+    {stop_id:20, stop_name:'Indira bridge circle'},
+    {stop_id:21, stop_name:'Noble nagar'},
+    {stop_id:22, stop_name:'Galaxy (Naroda)'},
+    {stop_id:23, stop_name:'Naroda Gam'},
+    {stop_id:24, stop_name:'Naroda Geb'},
+    {stop_id:25, stop_name:'Bilasiya circle'},
+    {stop_id:26, stop_name:'Nehru Chokdi (Dahegam)'},
+    {stop_id:27, stop_name:'Mota Chiloda'},
+    {stop_id:28, stop_name:'GH-6'},
+    {stop_id:29, stop_name:'GH-5'},
+    {stop_id:30, stop_name:'GH-4'},
+    {stop_id:31, stop_name:'GH-3 (Pathika)'},
+    {stop_id:32, stop_name:'GH-2'},
+    {stop_id:33, stop_name:'GH-1'},
+    {stop_id:34, stop_name:'Dholakuva Circle'},
+    {stop_id:35, stop_name:'Bhaijipura (RRU Hostel Gandhinagar)'},
+    {stop_id:36, stop_name:'Gandhinagar'},
+    {stop_id:37, stop_name:'Infocity'},
+    {stop_id:38, stop_name:'Gandhinagar Bus Station (Pathika)'},
+    {stop_id:39, stop_name:'Shastrinagar'},
+    {stop_id:40, stop_name:'Prabhat Chawk'},
+    {stop_id:41, stop_name:'Sola Bhagvat'},
+    {stop_id:42, stop_name:'Charodi Patya'},
+    {stop_id:43, stop_name:'VaishnoDevi Circle'},
+    {stop_id:44, stop_name:'Adalaj'},
+    {stop_id:45, stop_name:'Sargasan'},
+    {stop_id:46, stop_name:'Meghaninagar (RSU old campus)'},
+    {stop_id:47, stop_name:'Rameshwar'},
+    {stop_id:48, stop_name:'Memco'},
+    {stop_id:49, stop_name:'Rajiv Gandhi Bhavan'},
+    {stop_id:50, stop_name:'Naroda Patiya'},
+    {stop_id:51, stop_name:'Mukti Dham'},
+    {stop_id:52, stop_name:'GEB (Naroda)'},
+    {stop_id:53, stop_name:'Ring Road (Bilasiya)'},
+    {stop_id:54, stop_name:'Dahegam Umiya Mata Temple'},
+    {stop_id:55, stop_name:'Dahegam College'},
+    {stop_id:56, stop_name:'GEB Vad'},
+    {stop_id:57, stop_name:'Palaiya Gam Bus Station'},
+    {stop_id:58, stop_name:'Ahmedabad Railway Station'},
+    {stop_id:59, stop_name:'Ahmedabad Airport'},
+    {stop_id:60, stop_name:'Gandhinagar Bus Stand'},
+    {stop_id:61, stop_name:'Good Times Sangath IPL'},
+    {stop_id:62, stop_name:'Dehgam Bus Stand'},
+    {stop_id:63, stop_name:'Chiloda Circle'}
+  ];
+
+  const vehicles = [
+    {vehicle_id:1, bus_no:'GJ-18-GB-8138', vehicle_type:'student_bus', driver_name:'Mr. Ankit Priyadarshi'},
+    {vehicle_id:2, bus_no:'GJ-18-BT-6824', vehicle_type:'student_bus', driver_name:'Mr. Nareshbhai Parmar'},
+    {vehicle_id:3, bus_no:'GJ-18-BT-9317', vehicle_type:'student_bus', driver_name:'Mr. Nandubhai Solanki'},
+    {vehicle_id:4, bus_no:'GJ-18-BV-8192', vehicle_type:'staff_bus', driver_name:'Mr. Arjun Thakor'},
+    {vehicle_id:5, bus_no:'GJ-18-BV-8477', vehicle_type:'staff_bus', driver_name:'Mr. Vijaybhai Chavda'},
+    {vehicle_id:6, bus_no:'GJ-18-G-8653', vehicle_type:'staff_bus', driver_name:'Mr. Jigneshbhai Parmar'},
+    {vehicle_id:7, bus_no:'GJ-18-BV-8197', vehicle_type:'staff_bus', driver_name:'Mr. Nikul Desai'},
+    {vehicle_id:8, bus_no:'GSRTC-Morning', vehicle_type:'gsrtc_bus', driver_name:'GSRTC Driver'},
+    {vehicle_id:9, bus_no:'GSRTC-Evening', vehicle_type:'gsrtc_bus', driver_name:'GSRTC Driver'},
+    {vehicle_id:10, bus_no:'Anna Auto', vehicle_type:'auto', driver_name:'Anna Auto'},
+    {vehicle_id:11, bus_no:'Ajit Auto', vehicle_type:'auto', driver_name:'Ajit Auto'}
+  ];
+
+  const routes = [
+    {route_id:1, route_name:'Student Route 1', vehicle_id:1},
+    {route_id:2, route_name:'Student Route 2', vehicle_id:2},
+    {route_id:3, route_name:'Routine Bus 14:35', vehicle_id:3},
+    {route_id:4, route_name:'Routine Bus 18:10', vehicle_id:3},
+    {route_id:5, route_name:'Weekend Bus', vehicle_id:3},
+    {route_id:6, route_name:'GSRTC Morning', vehicle_id:8},
+    {route_id:7, route_name:'GSRTC Evening', vehicle_id:9},
+    {route_id:8, route_name:'Staff Bus SG Highway', vehicle_id:4},
+    {route_id:9, route_name:'Staff Bus Meghaninagar', vehicle_id:5},
+    {route_id:10, route_name:'Outsource Staff Bus Meghaninagar', vehicle_id:6},
+    {route_id:11, route_name:'Chiloda Staff Bus', vehicle_id:7},
+    {route_id:12, route_name:'Dahegam Staff Bus', vehicle_id:7}
+  ];
+
+  const routeStops = [
+    {route_id:1, stop_id:1, order:1},{route_id:1, stop_id:2, order:2},{route_id:1, stop_id:3, order:3},
+    {route_id:1, stop_id:4, order:4},{route_id:1, stop_id:5, order:5},{route_id:1, stop_id:6, order:6},
+    {route_id:1, stop_id:7, order:7},{route_id:1, stop_id:8, order:8},{route_id:1, stop_id:9, order:9},
+    {route_id:1, stop_id:10, order:10},{route_id:1, stop_id:11, order:11},{route_id:1, stop_id:12, order:12},
+    {route_id:1, stop_id:13, order:13},{route_id:1, stop_id:14, order:14},{route_id:1, stop_id:15, order:15},
+    {route_id:1, stop_id:16, order:16},{route_id:1, stop_id:17, order:17},
+
+   
+    {route_id:2, stop_id:1, order:1},{route_id:2, stop_id:2, order:2},{route_id:2, stop_id:18, order:3},
+    {route_id:2, stop_id:19, order:4},{route_id:2, stop_id:20, order:5},{route_id:2, stop_id:21, order:6},
+    {route_id:2, stop_id:22, order:7},{route_id:2, stop_id:23, order:8},{route_id:2, stop_id:24, order:9},
+    {route_id:2, stop_id:25, order:10},{route_id:2, stop_id:26, order:11},{route_id:2, stop_id:17, order:12},
+
+    
+    {route_id:6, stop_id:58, order:1},{route_id:6, stop_id:59, order:2},{route_id:6, stop_id:36, order:3},{route_id:6, stop_id:17, order:4},
+    {route_id:7, stop_id:17, order:1},{route_id:7, stop_id:36, order:2},{route_id:7, stop_id:59, order:3},
+
+    {route_id:8, stop_id:17, order:1},{route_id:8, stop_id:49, order:2},{route_id:8, stop_id:36, order:3},
+
+    {route_id:11, stop_id:15, order:1},{route_id:11, stop_id:27, order:2},{route_id:11, stop_id:36, order:3},
+
+    {route_id:12, stop_id:16, order:1},{route_id:12, stop_id:62, order:2},{route_id:12, stop_id:36, order:3}
+  ];
+
+  const trips = [
+    {trip_id:1, route_id:1, direction:'outbound', departure_time:'07:00:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:2, route_id:1, direction:'return', departure_time:'17:05:00', arrival_time:'19:00:00', days:'weekday'},
+    {trip_id:3, route_id:2, direction:'outbound', departure_time:'07:40:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:4, route_id:2, direction:'return', departure_time:'17:05:00', arrival_time:'19:00:00', days:'weekday'},
+    {trip_id:5, route_id:3, direction:'outbound', departure_time:'14:35:00', arrival_time:'15:55:00', days:'weekday'},
+    {trip_id:6, route_id:3, direction:'return', departure_time:'15:55:00', arrival_time:'16:55:00', days:'weekday'},
+    {trip_id:7, route_id:4, direction:'outbound', departure_time:'19:30:00', arrival_time:'20:40:00', days:'weekday'},
+    {trip_id:8, route_id:4, direction:'return', departure_time:'20:55:00', arrival_time:'21:55:00', days:'weekday'},
+    {trip_id:9, route_id:5, direction:'outbound', departure_time:'16:00:00', arrival_time:'17:00:00', days:'weekend'},
+    {trip_id:10, route_id:5, direction:'return', departure_time:'20:00:00', arrival_time:'21:00:00', days:'weekend'},
+    {trip_id:11, route_id:6, direction:'outbound', departure_time:'07:50:00', arrival_time:'08:45:00', days:'weekday'},
+    {trip_id:12, route_id:6, direction:'return', departure_time:'09:05:00', arrival_time:'10:00:00', days:'weekday'},
+    {trip_id:13, route_id:7, direction:'outbound', departure_time:'17:30:00', arrival_time:'18:10:00', days:'weekday'},
+    {trip_id:14, route_id:7, direction:'return', departure_time:'18:30:00', arrival_time:'20:00:00', days:'weekday'},
+    {trip_id:15, route_id:8, direction:'outbound', departure_time:'07:30:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:16, route_id:8, direction:'return', departure_time:'17:05:00', arrival_time:'19:00:00', days:'weekday'},
+    {trip_id:17, route_id:9, direction:'outbound', departure_time:'07:40:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:18, route_id:9, direction:'return', departure_time:'17:05:00', arrival_time:'19:00:00', days:'weekday'},
+    {trip_id:19, route_id:10, direction:'outbound', departure_time:'07:00:00', arrival_time:'08:00:00', days:'weekday'},
+    {trip_id:20, route_id:10, direction:'return', departure_time:'16:15:00', arrival_time:'17:30:00', days:'weekday'},
+    {trip_id:21, route_id:11, direction:'outbound', departure_time:'08:10:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:22, route_id:11, direction:'return', departure_time:'17:35:00', arrival_time:'18:15:00', days:'weekday'},
+    {trip_id:23, route_id:12, direction:'outbound', departure_time:'08:35:00', arrival_time:'09:00:00', days:'weekday'},
+    {trip_id:24, route_id:12, direction:'return', departure_time:'17:35:00', arrival_time:'17:50:00', days:'weekday'}
+  ];
+
+  const auto_services = [
+    {auto_id:1, name:'Anna Auto', contact_no:'9898058071', destination:'Ahmedabad Railway Station', fare:599},
+    {auto_id:2, name:'Anna Auto', contact_no:'9898058071', destination:'Ahmedabad Airport', fare:599},
+    {auto_id:3, name:'Anna Auto', contact_no:'9898058071', destination:'Gandhinagar Bus Stand', fare:449},
+    {auto_id:4, name:'Anna Auto', contact_no:'9898058071', destination:'Dehgam Bus Stand', fare:99},
+    {auto_id:5, name:'Anna Auto', contact_no:'9898058071', destination:'Chiloda Circle', fare:299},
+    {auto_id:6, name:'Anna Auto', contact_no:'9898058071', destination:'Good Times Sangath IPL → Dehgam', fare:149},
+    {auto_id:7, name:'Ajit Auto', contact_no:'9974257791', destination:'On Demand', fare:0}
+  ];
+
+  function findStopByName(name){
+    if(!name) return null;
+    const lower = name.trim().toLowerCase();
+    return stops.find(s => s.stop_name.toLowerCase() === lower) || null;
+  }
+
+  function fuzzyStops(q){
+    if(!q) return [];
+    q = q.trim().toLowerCase();
+    return stops.filter(s => s.stop_name.toLowerCase().includes(q)).slice(0,8);
+  }
+
+  function getRouteStops(route_id){
+    return routeStops
+      .filter(rs => rs.route_id === route_id)
+      .sort((a,b)=>a.order-b.order)
+      .map(rs => rs.stop_id);
+  }
+
+  function getVehicleForRoute(route){
+    return vehicles.find(v=>v.vehicle_id===route.vehicle_id);
+  }
+
+  function timeStrToMinutes(t){
+    const [hh,mm] = t.split(':').map(Number);
+    return hh*60 + mm;
+  }
+  function minutesToTimeStr(m){
+    m = ((m%1440)+1440)%1440;
+    const hh = Math.floor(m/60).toString().padStart(2,'0');
+    const mm = (m%60).toString().padStart(2,'0');
+    return `${hh}:${mm}`;
+  }
+
+  function computeNextWait(route_id){
+    const now = new Date();
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    const routeTrips = trips.filter(t => t.route_id===route_id).map(t => ({dep:timeStrToMinutes(t.departure_time), arr: timeStrToMinutes(t.arrival_time)})).sort((a,b)=>a.dep-b.dep);
+    if(routeTrips.length===0) return null;
+    for(const t of routeTrips){
+      if(t.dep >= nowMin) return t.dep - nowMin;
+    }
+    return (1440 - nowMin) + routeTrips[0].dep;
+  }
+
+  function computeTripDuration(route_id){
+    const routeTrips = trips.filter(t => t.route_id===route_id);
+    if(routeTrips.length>0){
+      const t = routeTrips[0];
+      const dur = Math.abs(timeStrToMinutes(t.arrival_time) - timeStrToMinutes(t.departure_time));
+      return dur || 30;
+    }
+    const rs = getRouteStops(route_id);
+    return Math.max(10, rs.length * 3);
+  }
+
+  // cost heuristics: autos use auto_services (if destination match), buses use per-stop pricing
+  function estimateCost(route, fromStopId, toStopId){
+    const vehicle = getVehicleForRoute(route);
+    if(!vehicle) return {cost:0, currency:'₹'};
+    if(vehicle.vehicle_type === 'auto'){
+      // try to match destination name to auto service
+      const destName = stops.find(s=>s.stop_id===toStopId)?.stop_name || '';
+      // find best match
+      const svc = auto_services.find(a => a.destination.toLowerCase().includes(destName.toLowerCase())) || auto_services.find(a=>a.name.includes(vehicle.bus_no.split(' ')[0])) || auto_services[0];
+      return {cost: svc ? svc.fare : 299, currency:'₹', auto_contact: svc.contact_no};
+    } else {
+      // bus/car: cost = per stop diff * 5 INR (example) + base
+      const rs = getRouteStops(route.route_id);
+      const idxFrom = rs.indexOf(fromStopId);
+      const idxTo = rs.indexOf(toStopId);
+      const steps = Math.abs(idxTo - idxFrom) || 1;
+      const base = vehicle.vehicle_type.includes('staff') ? 20 : 35;
+      const cost = base + steps * 8;
+      return {cost: Math.round(cost), currency:'₹'};
+    }
+  }
+
+  // CO2 estimate per person gram: auto:115g per trip, bus:40g per person
+  function estimateCO2(route, fromStopId, toStopId){
+    const vehicle = getVehicleForRoute(route);
+    const rs = getRouteStops(route.route_id);
+    const steps = Math.max(1, Math.abs(rs.indexOf(toStopId) - rs.indexOf(fromStopId)));
+    if(vehicle.vehicle_type === 'auto') return {co2: Math.round(115 * (steps/5)), unit:'g'};
+    if(vehicle.vehicle_type.includes('gsrtc') || vehicle.vehicle_type.includes('staff') || vehicle.vehicle_type.includes('student')) return {co2: Math.round(40 * (steps/5)), unit:'g'};
+    return {co2: Math.round(80 * (steps/5)), unit:'g'};
+  }
+
+  // traffic indicator basic heuristic: longer durations => higher traffic
+  function trafficLabel(totalDuration){
+    if(totalDuration <= 30) return 'Low';
+    if(totalDuration <= 50) return 'Moderate';
+    return 'High';
+  }
+
+  /********************************
+   * UI wiring
+   ********************************/
+  const fromInput = document.getElementById('fromInput');
+  const toInput = document.getElementById('toInput');
+  const fromDropdown = document.getElementById('fromDropdown');
+  const toDropdown = document.getElementById('toDropdown');
+  const swapBtn = document.getElementById('swapBtn');
+  const compareBtn = document.getElementById('compareBtn');
+  const resultsContainer = document.getElementById('resultsContainer');
+
+  // autocomplete
+  function wireAutocomplete(inputEl, dropdownEl){
+    inputEl.addEventListener('input', ()=>{
+      const val = inputEl.value.trim();
+      const list = fuzzyStops(val);
+      dropdownEl.innerHTML = '';
+      if(list.length === 0){
+        dropdownEl.style.display = 'none';
+        return;
+      }
+      list.forEach(s => {
+        const a = document.createElement('a');
+        a.className = 'list-group-item list-group-item-action';
+        a.textContent = s.stop_name;
+        a.addEventListener('click', () => {
+          inputEl.value = s.stop_name;
+          dropdownEl.style.display = 'none';
+        });
+        dropdownEl.appendChild(a);
+      });
+      dropdownEl.style.display = 'block';
+    });
+    inputEl.addEventListener('blur', ()=> setTimeout(()=>dropdownEl.style.display='none',120));
+    inputEl.addEventListener('focus', ()=> {
+      const list = fuzzyStops(inputEl.value);
+      dropdownEl.innerHTML = '';
+      list.forEach(s=>{
+        const a=document.createElement('a');
+        a.className='list-group-item list-group-item-action';
+        a.textContent=s.stop_name;
+        a.addEventListener('click', ()=>{ inputEl.value=s.stop_name; dropdownEl.style.display='none'; });
+        dropdownEl.appendChild(a);
+      });
+      dropdownEl.style.display = list.length ? 'block' : 'none';
+    });
+  }
+  wireAutocomplete(fromInput, fromDropdown);
+  wireAutocomplete(toInput, toDropdown);
+
+  swapBtn.addEventListener('click', ()=>{
+    const a = fromInput.value;
+    fromInput.value = toInput.value;
+    toInput.value = a;
+  });
+
+  // Main compare action
+  compareBtn.addEventListener('click', ()=> {
+    const fromName = fromInput.value.trim();
+    const toName = toInput.value.trim();
+    if(!fromName || !toName){ alert('Please enter both From and To'); return; }
+    const fromStop = findStopByName(fromName);
+    const toStop = findStopByName(toName);
+    if(!fromStop || !toStop){ alert('Stop not recognized. Try exact stop name or pick from dropdown'); return; }
+    const modeCar = document.getElementById('modeCar').checked;
+    const modeBus = document.getElementById('modeBus').checked;
+    const modeAuto = document.getElementById('modeAuto').checked;
+
+    // find candidate routes that include both stops and have the stop order consistent (from before to)
+    const candidates = [];
+    for(const r of routes){
+      const vehicle = getVehicleForRoute(r);
+      let modeType = 'bus';
+      if(vehicle.vehicle_type === 'auto') modeType = 'auto';
+      // mode filter
+      if(modeType === 'auto' && !modeAuto) continue;
+      if(modeType === 'bus' && !modeBus && !modeCar) {
+        // if user unchecked both car & bus, skip. (car not mapped explicit)
+        continue;
+      }
+      const rs = getRouteStops(r.route_id);
+      const idxFrom = rs.indexOf(fromStop.stop_id);
+      const idxTo = rs.indexOf(toStop.stop_id);
+      if(idxFrom === -1 || idxTo === -1) continue;
+      // ensure direction — assume both outbound & return are acceptable, we pick absolute diff
+      if(idxFrom === idxTo) continue;
+      // build option
+      const duration = computeTripDuration(r.route_id);
+      const wait = computeNextWait(r.route_id) ?? Math.round(Math.random()*15)+5;
+      const costObj = estimateCost(r, fromStop.stop_id, toStop.stop_id);
+      const co2 = estimateCO2(r, fromStop.stop_id, toStop.stop_id);
+      const totalDuration = duration + wait;
+      candidates.push({
+        route:r,
+        vehicle,
+        idxFrom, idxTo,
+        steps: Math.abs(idxTo-idxFrom),
+        travelTime: duration,
+        waitTime: wait,
+        cost: costObj.cost,
+        currency: costObj.currency || '₹',
+        auto_contact: costObj.auto_contact || null,
+        co2: co2.co2,
+        co2Unit: co2.unit,
+        totalDuration,
+        traffic: trafficLabel(totalDuration)
+      });
+    }
+
+    // add autos as on-demand options if user enabled auto (auto_services entries)
+    if(modeAuto){
+      // create pseudo options for autos that match the destination or are on-demand
+      auto_services.forEach(svc=>{
+        // if svc.destination contains "On Demand" or matches to/from, allow. For simplicity: include if destination contains toName or 'On Demand'
+        const toLowerDest = svc.destination.toLowerCase();
+        if(toLowerDest.includes(toName.toLowerCase()) || toLowerDest.includes('on demand') || toLowerDest.includes('dehgam') || toLowerDest.includes('gandhinagar')){
+          // estimate steps as distance 1-8
+          const steps = Math.max(1, Math.floor(Math.random()*6)+1);
+          const travelTime = 10 + steps*3;
+          const waitTime = 3 + Math.floor(Math.random()*7);
+          const totalDuration = travelTime + waitTime;
+          candidates.push({
+            route: { route_id: 1000 + svc.auto_id, route_name: svc.name + ' → ' + svc.destination },
+            vehicle: { vehicle_type: 'auto', bus_no: svc.name, driver_name: svc.name },
+            idxFrom:0, idxTo:steps,
+            steps,
+            travelTime,
+            waitTime,
+            cost: svc.fare,
+            currency:'₹',
+            auto_contact: svc.contact_no,
+            co2: Math.round(115 * (steps/5)),
+            co2Unit:'g',
+            totalDuration,
+            traffic: trafficLabel(totalDuration)
+          });
+        }
+      });
+    }
+
+    if(candidates.length === 0){
+      resultsContainer.innerHTML = `<div class="col-12"><div class="alert alert-warning">No routes found for selected stops and modes. Try more modes or different stops.</div></div>`;
+      return;
+    }
+
+    // mark fastest and best overall
+    candidates.sort((a,b)=>a.totalDuration - b.totalDuration);
+    const fastestTime = candidates[0].totalDuration;
+    // best overall = minimal (cost*0.6 + co2*0.4 normalized). We'll compute a score.
+    const maxCost = Math.max(...candidates.map(c=>c.cost||0));
+    const maxCO2 = Math.max(...candidates.map(c=>c.co2||0));
+    candidates.forEach(c=>{
+      const costNorm = maxCost ? (c.cost / maxCost) : 0;
+      const co2Norm = maxCO2 ? (c.co2 / maxCO2) : 0;
+      c.score = costNorm*0.6 + co2Norm*0.4;
+    });
+    const bestOverall = candidates.reduce((a,b)=> a.score < b.score ? a : b);
+
+    // Render cards
+    resultsContainer.innerHTML = '';
+    candidates.forEach((c, idx)=>{
+      const col = document.createElement('div');
+      col.className = 'col-12';
+      col.innerHTML = `
+        <div class="result-card row align-items-center">
+          <div class="col-12 col-md-8">
+            <div class="d-flex align-items-center mb-2">
+              <div class="icon-emoji">${c.vehicle.vehicle_type === 'auto' ? '🛺' : '🚌'}</div>
+              <div>
+                <div class="d-flex align-items-center gap-2">
+                  <h5 class="mb-0">${c.route.route_name}</h5>
+                  <div class="${ (c.totalDuration === fastestTime) ? 'badge-tag' : '' }" style="${ (c.totalDuration === fastestTime) ? '' : 'display:none' }">Fastest Option</div>
+                  <div class="${ (c.route.route_id === bestOverall.route.route_id) ? 'badge-tag' : '' }" style="${ (c.route.route_id === bestOverall.route.route_id) ? 'background:#DDEBFF;color:#14345A; display:inline-block' : 'display:none' }">Best Overall</div>
+                </div>
+                <small class="text-muted">${c.vehicle.driver_name ? 'Driver: '+c.vehicle.driver_name : ''}</small>
+              </div>
+            </div>
+
+            <div class="row mt-3 gx-2">
+              <div class="col-6 col-sm-3 metric">
+                <span class="val text-danger">${c.currency} ${c.cost}</span>
+                <span class="label">Total Cost</span>
+              </div>
+              <div class="col-6 col-sm-3 metric">
+                <span class="val">${c.travelTime}m</span>
+                <span class="label">Travel Time</span>
+              </div>
+              <div class="col-6 col-sm-3 metric">
+                <span class="val">${c.waitTime}m</span>
+                <span class="label">Wait Time</span>
+              </div>
+              <div class="col-6 col-sm-3 metric">
+                <span class="val">${c.co2}${c.co2Unit}</span>
+                <span class="label">CO₂ Impact</span>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+              <div class="text-muted">Traffic: <span class="traffic-${c.traffic}">${c.traffic}</span></div>
+              <div class="text-muted">Total Duration: <strong>${c.totalDuration}m</strong></div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4 text-md-end mt-3 mt-md-0">
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary btn-sm view-details" data-idx="${idx}">View Details</button>
+              ${ c.vehicle.vehicle_type === 'auto' ? `<a class="btn btn-primary btn-sm contact-auto" href="tel:${c.auto_contact||''}">Contact ${c.vehicle.bus_no}</a>` : `<button class="btn btn-primary btn-sm book" data-route="${c.route.route_id}">Book</button>`}
+              <a class="btn btn-light btn-sm" href="./main.html">Continue Checking</a>
+            </div>
+          </div>
+        </div>
+      `;
+      resultsContainer.appendChild(col);
+    });
+
+    // attach action handlers for viewDetails/book buttons
+    Array.from(document.querySelectorAll('.view-details')).forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const idx = Number(btn.getAttribute('data-idx'));
+        showDetailsModal(candidates[idx], fromName, toName);
+      });
+    });
+    Array.from(document.querySelectorAll('.book')).forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        alert('Booking simulated for route. (In production, this would open booking flow.)');
+      });
+    });
+  });
+
+  /********************************
+   * Details modal (simple)
+   ********************************/
+  function showDetailsModal(option, fromName, toName){
+    const modalHtml = `
+      <div class="modal-backdrop" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:2000;display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;border-radius:12px;max-width:720px;width:95%;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h5 style="margin:0;">${option.route.route_name} — Details</h5>
+            <button id="closeModalBtn" class="btn btn-sm btn-outline-secondary">Close</button>
+          </div>
+          <p class="text-muted mb-1">From <strong>${fromName}</strong> → To <strong>${toName}</strong></p>
+          <p><strong>Driver:</strong> ${option.vehicle.driver_name || 'N/A'}</p>
+          <p><strong>Stops Covered:</strong> ${option.steps} stop(s) between your points</p>
+          <p><strong>Estimated Price:</strong> ${option.currency} ${option.cost} ${option.auto_contact ? '(Auto contact: '+option.auto_contact+')' : ''}</p>
+          <p><strong>Travel time:</strong> ${option.travelTime} minutes • <strong>Wait time:</strong> ${option.waitTime} minutes</p>
+          <p><strong>CO₂ impact:</strong> ${option.co2}${option.co2Unit}</p>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+            <button id="closeModalBtn2" class="btn btn-sm btn-secondary">Close</button>
+            <button id="bookNow" class="btn btn-sm btn-primary">Book (simulate)</button>
+          </div>
+        </div>
+      </div>
+    `;
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = modalHtml;
+    document.body.appendChild(wrapper);
+    wrapper.querySelector('#closeModalBtn').addEventListener('click', ()=> wrapper.remove());
+    wrapper.querySelector('#closeModalBtn2').addEventListener('click', ()=> wrapper.remove());
+    wrapper.querySelector('#bookNow').addEventListener('click', ()=> { alert('Booking simulated'); wrapper.remove(); });
+  }
+
+  // small nicety: prefill sample search
+  fromInput.value = 'RRU';
+  toInput.value = 'Gandhinagar';
+  </script>
+  <script src="./main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

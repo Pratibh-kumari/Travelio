@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travelio - Plan Ride</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light" style="background: linear-gradient(45deg,#872bffb6,#f411ceb5);">
+
+  <header style="border-bottom: 1px solid rgba(0, 0, 0, 0.388);">
+    <nav class="navbar navbar-expand-lg navbar-light py-3">
+      <div class="container">
+        <a class="navbar-brand text-dark fw-bold" href="#">Travelio</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-2">
+              <a class="nav-link active text-dark" aria-current="page" href="./home.html">Home</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link text-dark" href="./main.html">Ride</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link text-dark" href="./drive.html">Drive</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link text-dark" href="./review.html">Review</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link disabled text-dark" aria-disabled="true">Help</a>
+            </li>
+          </ul>
+
+          <div class="dropdown d-flex align-items-center ms-3">
+            <a class="nav-link dropdown-toggle text-dark p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="./images/istockphoto-1495088043-612x612.jpg" alt="Profile" 
+                   class="img-fluid" style="height:48px; width:auto; background:#f0f0f0; border-radius:8px;">
+            </a>
+            <ul class="dropdown-menu bg-white dropdown-menu-end">
+              <li><a class="dropdown-item text-dark" href="#">Action</a></li>
+              <li><a class="dropdown-item text-dark" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-dark" href="#">Something else here</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <h1 class="mb-4 text-center" style="font-family: serif;">Enter Your Schedule</h1>
+
+        <div class="card shadow-sm rounded-3" style="background-color: #eeeae076;">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center" style="margin-top: 24px;letter-spacing: 1px; color:#1c0218;font-size: 24px;text-decoration: underline 0.5px;">Plan Your Ride</h5>
+            
+            <form id="rideForm">
+               <div class="mb-3">
+          <label for="passengerName" class="form-label">Driver Name</label>
+          <input type="text" id="passengerName" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+
+              <div class="mb-3">
+  <label class="form-label">From</label>
+  <input type="text" class="form-control" id="fromInput" placeholder="Enter starting location" list="locations" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">To</label>
+  <input type="text" class="form-control" id="toInput" placeholder="Enter destination" list="locations" required>
+</div>
+                 <datalist id="locations">
+                  <option>Old Campus</option>
+                  <option>Dafnala</option>
+                  <option>R.T.O. circle</option>
+                  <option>Sabarmati</option>
+                  <option>Visat Junction</option>
+                  <option>Tapovan Circle</option>
+                  <option>Koba Circle</option>
+                  <option>Bhaijipura Cross Road</option>
+                  <option>Raksha Shakti Circle</option>
+                  <option>Reliance Chokdi</option>
+                  <option>GH 0</option>
+                  <option>GH-3</option>
+                  <option>GH-7</option>
+                  <option>Sector 30 Circle</option>
+                  <option>Chiloda</option>
+                  <option>Dahegam Bus station</option>
+                  <option>RRU Campus</option>
+                  <option>Airport circle</option>
+                  <option>Hansol</option>
+                  <option>Indira bridge circle</option>
+                  <option>Noble nagar</option>
+                  <option>Galaxy (Naroda)</option>
+                  <option>Naroda Gam</option>
+                  <option>Naroda Geb</option>
+                  <option>Bilasiya circle</option>
+                  <option>Nehru Chokdi (Dahegam)</option>
+                  <option>Mota Chiloda</option>
+                  <option>GH-6</option>
+                  <option>GH-5</option>
+                  <option>GH-4</option>
+                  <option>GH-3 (Pathika)</option>
+                  <option>GH-2</option>
+                  <option>GH-1</option>
+                  <option>Dholakuva Circle</option>
+                  <option>Bhaijipura (RRU Hostel Gandhinagar)</option>
+                  <option>Gandhinagar</option>
+                  <option>Infocity</option>
+                  <option>Gandhinagar Bus Station (Pathika)</option>
+                  <option>Shastrinagar</option>
+                  <option>Prabhat Chawk</option>
+                  <option>Sola Bhagvat</option>
+                  <option>Charodi Patya</option>
+                  <option>VaishnoDevi Circle</option>
+                  <option>Adalaj</option>
+                  <option>Sargasan</option>
+                  <option>Meghaninagar (RSU old campus)</option>
+                  <option>Rameshwar</option>
+                  <option>Memco</option>
+                  <option>Rajiv Gandhi Bhavan</option>
+                  <option>Naroda Patiya</option>
+                  <option>Mukti Dham</option>
+                  <option>GEB (Naroda)</option>
+                  <option>Ring Road (Bilasiya)</option>
+                  <option>Dahegam Umiya Mata Temple</option>
+                  <option>Dahegam College</option>
+                  <option>GEB Vad</option>
+                  <option>Palaiya Gam Bus Station</option>
+                  <option>Ahmedabad Railway Station</option>
+                  <option>Ahmedabad Airport</option>
+                  <option>Gandhinagar Bus Stand</option>
+                  <option>Good Times Sangath IPL</option>
+                  <option>Dehgam Bus Stand</option>
+                  <option>Chiloda Circle</option>
+                 </datalist>
+>
+
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control" id="dateInput" required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Time</label>
+                <input type="time" class="form-control" id="timeInput" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100" style="background-color:#37055b;">Done</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h6 class="mb-3">Your Planned Rides</h6>
+          <ul class="list-group" id="eventList"></ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const rideForm = document.getElementById("rideForm");
+    const eventList = document.getElementById("eventList");
+
+    rideForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const from = document.getElementById("fromInput").value;
+      const to = document.getElementById("toInput").value;
+      const date = document.getElementById("dateInput").value;
+      const time = document.getElementById("timeInput").value;
+
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.innerHTML = `
+        <div>
+          <strong>${from}</strong> → <strong>${to}</strong><br>
+          <small>${date} at ${time}</small>
+        </div>
+        <button class="btn btn-sm btn-outline-danger">Delete</button>
+      `;
+
+      li.querySelector("button").addEventListener("click", () => {
+        li.remove();
+      });
+
+      eventList.appendChild(li);
+
+      rideForm.reset();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

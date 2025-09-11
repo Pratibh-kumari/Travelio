@@ -1,0 +1,101 @@
+:root{
+      --purple:#872bff;
+      --purple-soft:#872bffb6;
+      --pink:#f411ce;
+      --blue:#3f51ff;
+      --bg1: linear-gradient(135deg,#f8c9ff 0%, #ffd7f9 40%, #f6f0ff 100%);
+      --card-bg: rgba(255,255,255,0.95);
+    }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(circle at 10% 10%, rgba(135,43,255,0.10), transparent 10%),
+                  radial-gradient(circle at 90% 90%, rgba(244,17,206,0.08), transparent 10%),
+                  linear-gradient(135deg, #f9e0ff 0%, #f7d1ff 30%, #ffd1f4 60%);
+      min-height:100vh;
+      color:#222;
+    }
+
+    /* navbar */
+    .brand{
+      font-weight:700;
+      color:var(--purple);
+    }
+    .app-card{
+      max-width:920px;
+      margin: 40px auto;
+      background: linear-gradient(45deg,#f411ce33,#872bff33);
+      border-radius:16px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    label { font-weight:600; color:#2c2c2c; }
+
+    .input-box .form-control{
+      height:56px;
+      border-radius:10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+      font-size:16px;
+    }
+
+    .swap-btn{
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+      border-radius:50%;
+    }
+
+    .modes label{ font-weight:600; margin-right:12px; }
+    .modes input[type=checkbox]{ width:18px; height:18px; }
+
+    .compare-btn{
+      background: linear-gradient(90deg,var(--purple),var(--blue));
+      border: none;
+      color:white;
+      font-weight:700;
+      border-radius:40px;
+      padding:16px 32px;
+      font-size:18px;
+      box-shadow: 0 8px 20px rgba(59,32,136,0.18);
+    }
+
+    .section-title{
+      font-size:28px;
+      font-weight:700;
+      margin-top:20px;
+      color:#28323a;
+    }
+
+    /* cards */
+    .result-card{
+      border-radius:14px;
+      background: var(--card-bg);
+      padding:20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .badge-tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:12px;
+      background: #fff3a7;
+      color:#7b6100;
+    }
+    .metric{ text-align:center; }
+    .metric .val{ font-weight:700; font-size:20px; display:block; }
+    .metric .label{ font-size:13px; color:#666; }
+
+    .traffic-Moderate{ color:#ff6f00; font-weight:700; }
+    .traffic-Low{ color:#2e7d32; font-weight:700; }
+    .traffic-High{ color:#c62828; font-weight:700; }
+
+    .icon-emoji{ font-size:28px; margin-right:10px; }
+
+    /* small screens adjust */
+    @media (max-width:575px){
+      .input-grid{ gap:10px; }
+      .compare-btn{ font-size:16px; padding:12px 18px; }
+    }
