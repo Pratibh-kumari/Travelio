@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const password = document.getElementById("password").value;
 
-    if (password === "12345") {
+    if (password === "nChuuya2943") {
       // Redirect if password is correct
       window.location.href = "./home.html";
     } else {
@@ -14,3 +14,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
